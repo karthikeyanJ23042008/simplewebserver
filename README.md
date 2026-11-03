@@ -37,13 +37,18 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 ```
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
 <html>
     <head>
         <title>Device Information</title>
     </head>
     <body>
+        <h2> KARTHIKEYAN J(26009634)</h2>
         <table border="1" cellspacing="5" cellpadding="15">
-        <caption>My Laptop Device Information</caption>
+        <caption>Karthi Laptop Device Information</caption>
 
             <tr bgcolor="lime">
                 <th>S.No.</th>
@@ -61,9 +66,9 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
             <tr>
                 <td>2</td>
-                <td>Processor</td>
-                <td>Intel Core 5</td>
-                <td>2.20 GHz</td>
+                <td>Product ID</td>
+                <td>00342-42943-41971</td>
+                <td>AAOEM</td>
             </tr>
 
             <tr>
@@ -104,14 +109,25 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
         </table>
     </body>
 </html>
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Client request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',8000)
+httpd = HTTPServer(server_address,myhandler)
+print("my own webserver is running successfully...")
+httpd.serve_forever()
 
 ```
-
 ## OUTPUT:
 
 Web page
-![alt text](image.png)
+![alt text](image-2.png)
 server page
-![alt text](image-1.png)
+![alt text](image-3.png)
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
